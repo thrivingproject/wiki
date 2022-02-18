@@ -8,10 +8,11 @@ def index(request):
         "entries": util.list_entries()
     })
 
-def entry(request, entry):
-    mdown = util.get_entry(entry)
+# /wiki/<page> function to use get_entry() to convert page's md to HTML
+def entry(request, page):
+    mdown = util.get_entry(page)
     content = markdown2.markdown(mdown)
     return render(request, "encyclopedia/entry.html", {
-        "title": entry,
+        "title": page,
         "body": content
     })

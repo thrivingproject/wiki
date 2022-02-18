@@ -6,10 +6,10 @@
 <!-- Content -->
 {% block body %}
     <h1>All Pages</h1>
-
+    <!-- All entries with respective links -->
     <ul>
         {% for entry in entries %}
-            <li>{{ entry }}</li>
+            <li><a href="{% url 'page' entry %}">{{ entry }}</a></li>
         {% endfor %}
     </ul>
 

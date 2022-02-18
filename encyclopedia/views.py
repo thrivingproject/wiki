@@ -26,5 +26,11 @@ def search(request):
     if(util.get_entry(search) is not None):
         return HttpResponseRedirect(reverse("page", kwargs={'page': search }))
     else:
-        return render(request, "encyclopedia/index.html", {
+        results = []
+        for i in util.list_entries():
+            if search.lower() in i.lower():
+                results.append(i)
+
+        return render(request, "encyclopedia/results.html", {
+        "entries": results
     })

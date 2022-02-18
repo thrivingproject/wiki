@@ -18,3 +18,13 @@ def entry(request, page):
         })
     except: 
         return render(request, "encyclopedia/page_not_found.html")
+
+def search(request):
+    if request.method == "POST":    
+        search = request.POST['q']
+        return render(request, "encyclopedia/search.html", {
+            'q': search
+        })
+    else:
+        return render(request, "encyclopedia/search.html", {
+        })

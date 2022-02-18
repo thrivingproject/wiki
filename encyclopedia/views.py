@@ -1,5 +1,7 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 import markdown2
+from django.urls import reverse
 
 from . import util
 
@@ -19,12 +21,10 @@ def entry(request, page):
     except: 
         return render(request, "encyclopedia/page_not_found.html")
 
-def search(request):
-    if request.method == "POST":    
-        search = request.POST['q']
-        return render(request, "encyclopedia/search.html", {
-            'q': search
-        })
+def search(request):   
+    search = request.GET['q']
+    if(util.get_entry(search) is not None):
+        return HttpResponseRedirect(reverse("page", kwargs={'page': search }))
     else:
-        return render(request, "encyclopedia/search.html", {
-        })
+        return render(request, "encyclopedia/index.html", {
+    })

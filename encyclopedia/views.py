@@ -10,9 +10,8 @@ def index(request):
 
 def entry(request, entry):
     md = util.get_entry(entry)
-    if md:
-        html = markdown2.markdown(md)
-        return render(request, "encyclopedia/layout.html", {
-            "title": entry,
-            "content": html
+    html = markdown2.markdown(md)
+    return render(request, "encyclopedia/entry.html", {
+        "title": entry,
+        "content": html
     })

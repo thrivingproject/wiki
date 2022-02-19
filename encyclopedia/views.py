@@ -12,18 +12,18 @@ def index(request):
     })
 
 # Page
-def view_page(request, search_string):
+def view_page(request, page_name):
     # If page exists
     try:
-        content = markdown2.markdown(util.get_entry(search_string))
+        content = markdown2.markdown(util.get_entry(page_name))
         return render(request, "encyclopedia/page.html", {
-            "title": search_string,
+            "page_name": page_name,
             "body": content
         })
     # Does not exist
     except: 
         return render(request, "encyclopedia/page_not_found.html", {
-            "search_string": search_string
+            "page_name": page_name
         })
 
 # Search
@@ -43,8 +43,5 @@ def search(request):
         "entries": results
         })
        
-# Edit
-def edit(request):
-    return render(request, "encyclopedia/edit.html", {
-        "entries": util.list_entries()
-    })
+def edit_page(request):
+    return render(request, "encyclopedia/edit.html")

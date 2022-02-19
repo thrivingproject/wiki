@@ -17,12 +17,15 @@
                 <form method="GET" action="{% url 'search' %}">
                     <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
                 </form>
+                <!-- Home -->
                 <div>
                     <a href="{% url 'index' %}">Home</a>
                 </div>
+                <!-- Edit -->
                 <div>
-                    Create New Page
+                    <a href="{% url 'edit' %}">Create New Page</a>
                 </div>
+                <!-- Random -->
                 <div>
                     Random Page
                 </div>

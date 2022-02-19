@@ -57,3 +57,9 @@ def edit_page(request, page_name):
             "page_name": page_name,
             "body": content
         })
+
+# Save
+def save_page(request, page_name):
+    content = request.POST['content']
+    util.save_entry(page_name, content)
+    return HttpResponseRedirect("/wiki/"+page_name+"/")

@@ -1,9 +1,18 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
+    Edit {{ page_name }}
 {% endblock %}
 <!-- Content -->
 {% block body %}
 <h1>Editing {{ page_name }}</h1>
-{{ body }}
+<br>
+<form action="{% url 'save' page_name%}" method="post">
+    {% csrf_token %}
+    <textarea class="form-control" name="content" rows="20" cols="10">{{ body }}</textarea>
+    <br>
+    <div>
+        <input type="submit" value="Save">
+    </div>
+</form>
 {% endblock %}

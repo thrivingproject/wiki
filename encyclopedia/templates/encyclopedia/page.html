@@ -5,7 +5,7 @@
 {% endblock %}
 <!-- Content -->
 {% block body %}
-
     {{ body|safe}}
-
+<!-- Edit -->
+<a class="btn btn-secondary" href="{% url 'edit' %}" role="button">Edit</a>
 {% endblock %}

@@ -16,7 +16,7 @@ def view_entry(request, page_name):
     # If an entry is requested that does not exist, indicate requested page dne
     if util.get_entry(page_name) is None:
         return render(request, "encyclopedia/page_not_found.html", {
-        "page_name": page_name
+        "page_name": page_name.capitalize()
     }) 
     # Present page that displays the content of the entry with matching title
     content = markdown2.markdown(util.get_entry(page_name))
@@ -34,14 +34,20 @@ def search(request):
         if search_string.lower() in i.lower():
             results.append(i)
     # Redirect to page or page not found if search string matches no entries
-    if util.get_entry(search_string) is not None or not len(results):
+    if util.get_entry(search_string) is not None:
        return view_entry(request, search_string)
     # Display search results    
     else:
+        if not len(results):
+            message = "No results found"
+        else:
+            message = ""
         return render(request, "encyclopedia/results.html", {
-        "entries": results
-        })
-       
+            "entries": results,
+            "message": message
+            })
+
+# Edit       
 def edit_page(request, page_name):
     if util.get_entry(page_name) is not None:
         content = markdown2.markdown(util.get_entry(page_name))

@@ -29,26 +29,20 @@ def view_page(request, search_string):
 # Search
 def search(request):   
     search_string = request.GET['q']
-    # Redirect to entry
-    if(util.get_entry(search_string) is not None):
-        return HttpResponseRedirect(reverse("page", kwargs={'page': search_string }))
-    # Display search_string results    
+    results = []
+    # Populate array with entries that match search string
+    for i in util.list_entries():
+        if search_string.lower() in i.lower():
+            results.append(i)
+    # Redirect to page or page not found
+    if util.get_entry(search_string) is not None or not len(results):
+       return view_page(request, search_string)
+    # Display search results    
     else:
-        results = []
-        # Check if search string matches entries
-        for i in util.list_entries():
-            if search_string.lower() in i.lower():
-                results.append(i)
-        # Search results found        
-        if len(results):
-            return render(request, "encyclopedia/results.html", {
-            "entries": results
-            })
-        # No results found
-        else:
-            return view_page(request, search_string)
-        
-
+        return render(request, "encyclopedia/results.html", {
+        "entries": results
+        })
+       
 # Edit
 def edit(request):
     return render(request, "encyclopedia/edit.html", {

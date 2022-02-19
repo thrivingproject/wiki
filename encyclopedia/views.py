@@ -43,5 +43,12 @@ def search(request):
         "entries": results
         })
        
-def edit_page(request):
-    return render(request, "encyclopedia/edit.html")
+def edit_page(request, page_name):
+    if util.get_entry(page_name) is not None:
+        content = markdown2.markdown(util.get_entry(page_name))
+    else:
+        content = ""
+    return render(request, "encyclopedia/edit.html", {
+            "page_name": page_name,
+            "body": content
+        })

@@ -7,7 +7,7 @@
 {% block body %}
 <h1>Editing {{ page_name }}</h1>
 <br>
-<form action="{% url 'save' page_name%}" method="post">
+<form action="{% url 'save' page_name %}" method="post">
     {% csrf_token %}
     <textarea class="form-control" name="content" rows="20" cols="10">{{ body }}</textarea>
     <br>

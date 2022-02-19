@@ -49,10 +49,7 @@ def search(request):
 
 # Edit       
 def edit_page(request, page_name):
-    if util.get_entry(page_name) is not None:
-        content = markdown2.markdown(util.get_entry(page_name))
-    else:
-        content = ""
+    content = markdown2.markdown(util.get_entry(page_name))
     return render(request, "encyclopedia/edit.html", {
             "page_name": page_name,
             "body": content

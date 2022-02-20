@@ -6,7 +6,7 @@
 {% block body %}
 <form action="{% url 'save_new' %}" method="post">
     {% csrf_token %}
-    <input type="text" class="form-control" name="page_name" placeholder="Title">
+    <input type="text" class="form-control" name="page_name" placeholder="Title" required>
     <br>
     <textarea class="form-control" rows="10" name="content" placeholder="Enter content here"></textarea>
     <br>

@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 import markdown2
+import random
 
 from . import util
 
@@ -77,3 +78,6 @@ def save_new_page(request):
     util.save_entry(page_name, content)
     return HttpResponseRedirect("/wiki/"+page_name+"/")
 
+# Random
+def arbitrary(request):
+    return HttpResponseRedirect("/wiki/"+random.choice(util.list_entries())) 

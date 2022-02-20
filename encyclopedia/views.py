@@ -55,8 +55,25 @@ def edit_page(request, page_name):
             "body": content
         })
 
+# New       
+def new_page(request):
+    content = ""
+    page_name = ""
+    return render(request, "encyclopedia/new.html", {
+            "body": content,
+            "page_name": page_name
+        })
+
 # Save
 def save_page(request, page_name):
     content = request.POST['content']
     util.save_entry(page_name, content)
     return HttpResponseRedirect("/wiki/"+page_name+"/")
+
+# Save new page
+def save_new_page(request):
+    page_name = request.POST['page_name']
+    content = request.POST['content']
+    util.save_entry(page_name, content)
+    return HttpResponseRedirect("/wiki/"+page_name+"/")
+

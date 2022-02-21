@@ -1,10 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
 import markdown2
 import random
-from django.contrib import messages
-import time
 
 from . import util
 

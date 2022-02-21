@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.urls import reverse
 import markdown2
 import random
+from django.contrib import messages
+import time
 
 from . import util
 
@@ -75,8 +77,15 @@ def save_page(request, page_name):
 def save_new_page(request):
     page_name = request.POST['page_name']
     content = request.POST['content']
-    util.save_entry(page_name, content)
-    return HttpResponseRedirect("/wiki/"+page_name+"/")
+    # Check to see if page already exists
+    if util.get_entry(page_name):
+        return render(request, "encyclopedia/redirect.html", {
+            "page_name": page_name
+        })
+    # Save and redirect
+    else:
+        util.save_entry(page_name, content)
+        return HttpResponseRedirect("/wiki/"+page_name+"/")
 
 # Random
 def arbitrary(request):

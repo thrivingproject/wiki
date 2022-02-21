@@ -1,3 +1,3 @@
 <h1>Solution</h1>
 
-<p>I fixed the <a href="/wiki/bug">Bug</a> by making the title field mandatory.</p>
+<p><p>I fixed the <a href="/wiki/bug">Bug</a> by setting the title field's HTML input to <em>required</em>.</p>
